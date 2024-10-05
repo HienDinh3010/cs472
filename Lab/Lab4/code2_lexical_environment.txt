@@ -1,0 +1,51 @@
+1. Global EC creation:
+   - Outer: null
+   - LE: [{
+     x: undefined,
+     myFunction: function
+   }]
+   - TDZ: {}
+
+2. Global EC execution (initial):
+   - Outer: null
+   - LE: [{
+     x: 9,
+     myFunction: function
+   }]
+   - TDZ: {}
+
+3. myFunction FEC creation (first call):
+   - Outer: Global EC
+   - LE: [{}]  // Empty because no local variables are declared
+   - TDZ: {}
+
+4. myFunction FEC execution (first call):
+   - Outer: Global EC
+   - LE: [{}]  // Still empty, x is retrieved from the outer (global) scope
+   - TDZ: {}
+
+5. Global EC execution (after first myFunction call):
+   - Outer: null
+   - LE: [{
+     x: 5,  // x has been reassigned to 5
+     myFunction: function
+   }]
+   - TDZ: {}
+
+6. myFunction FEC creation (second call):
+   - Outer: Global EC
+   - LE: [{}]  // Empty again for the new function call
+   - TDZ: {}
+
+7. myFunction FEC execution (second call):
+   - Outer: Global EC
+   - LE: [{}]  // Still empty, x is retrieved from the outer (global) scope
+   - TDZ: {}
+
+8. Global EC (final state):
+   - Outer: null
+   - LE: [{
+     x: 5,
+     myFunction: function
+   }]
+   - TDZ: {}

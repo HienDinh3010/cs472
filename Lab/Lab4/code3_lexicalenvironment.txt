@@ -1,0 +1,45 @@
+1. Global EC creation:
+   - Outer: null
+   - LE: [{
+     foo: undefined,
+     bar: function
+   }]
+   - TDZ: {}
+
+2. Global EC execution:
+   - Outer: null
+   - LE: [{
+     foo: 1,
+     bar: function
+   }]
+   - TDZ: {}
+
+3. bar FEC creation:
+   - Outer: Global EC
+   - LE: [{
+     foo: undefined  // local foo is hoisted and initialized to undefined
+   }]
+   - TDZ: {}
+
+4. bar FEC execution:
+   - Step 1 (before if statement):
+     - Outer: Global EC
+     - LE: [{
+       foo: undefined
+     }]
+     - TDZ: {}
+
+   - Step 2 (after if statement, foo assigned 10):
+     - Outer: Global EC
+     - LE: [{
+       foo: 10
+     }]
+     - TDZ: {}
+
+5. Global EC (final state, after bar() execution):
+   - Outer: null
+   - LE: [{
+     foo: 1,  // global foo remains unchanged
+     bar: function
+   }]
+   - TDZ: {}

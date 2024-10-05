@@ -1,0 +1,81 @@
+1. Global EC (Execution Context) creation:
+   - Outer: null
+   - LE: [{
+     a: undefined,
+     b: undefined,
+     c: function
+   }]
+   - TDZ: { x }
+
+2. Global EC execution:
+   - Outer: null
+   - LE: [{
+     x: undefined,
+     a: 5,
+     b: 10,
+     c: function
+   }]
+   - TDZ: {}
+
+3. C FEC creation:
+   - Outer: Global EC
+   - LE: [{
+     a: undefined,
+     b: undefined,
+     c: undefined,
+     f: function,
+     x: undefined
+   }]
+   - TDZ: {}
+
+4. C FEC execution (initial):
+   - Outer: Global EC
+   - LE: [{
+     a: 8,
+     b: 9,
+     c: 10,
+     f: function,
+     x: undefined
+   }]
+   - TDZ: {}
+
+5. F FEC creation:
+   - Outer: C FEC
+   - LE: [{
+     a: undefined,
+     b: undefined,
+     c: undefined,
+     x: undefined
+   }]
+   - TDZ: {}
+
+6. F FEC execution:
+   - Outer: C FEC
+   - LE: [{
+     a: 8,
+     b: 10,
+     c: 10,
+     x: 5
+   }]
+   - TDZ: {}
+
+7. C FEC execution (after f() call):
+   - Outer: Global EC
+   - LE: [{
+     a: 8,
+     b: 9,
+     c: 10,
+     f: function,
+     x: 10
+   }]
+   - TDZ: {}
+
+8. Global EC (final state):
+   - Outer: null
+   - LE: [{
+     x: undefined,
+     a: 5,
+     b: 10,
+     c: function
+   }]
+   - TDZ: {}
