@@ -1,0 +1,75 @@
+1. Global EC creation:
+   - Outer: null
+   - LE: [{
+     str: <uninitialized>,
+     user: undefined,
+     show: function
+   }]
+   - TDZ: { str }
+
+2. Global EC execution (initial):
+   - Outer: null
+   - LE: [{
+     str: "Greetings, ",
+     user: {
+       firstName: "John",
+       lastname: "Smith",
+       display: function
+     },
+     show: function
+   }]
+   - TDZ: {}
+
+3. user.display() FEC creation:
+   - Outer: Global EC
+   - LE: [{}]  // Empty because no local variables are declared
+   - TDZ: {}
+
+4. user.display() FEC execution:
+   - Outer: Global EC
+   - LE: [{}]  // Still empty, accessing str from global scope
+   - TDZ: {}
+   - This binding: user object
+
+5. show("hi") FEC creation (called from display):
+   - Outer: Global EC
+   - LE: [{
+     msg: undefined
+   }]
+   - TDZ: {}
+
+6. show("hi") FEC execution:
+   - Outer: Global EC
+   - LE: [{
+     msg: "hi"
+   }]
+   - TDZ: {}
+   - This binding: global object (or undefined in strict mode)
+
+7. show.call(user, "hello") FEC creation:
+   - Outer: Global EC
+   - LE: [{
+     msg: undefined
+   }]
+   - TDZ: {}
+
+8. show.call(user, "hello") FEC execution:
+   - Outer: Global EC
+   - LE: [{
+     msg: "hello"
+   }]
+   - TDZ: {}
+   - This binding: user object
+
+9. Global EC (final state):
+   - Outer: null
+   - LE: [{
+     str: "Greetings, ",
+     user: {
+       firstName: "John",
+       lastname: "Smith",
+       display: function
+     },
+     show: function
+   }]
+   - TDZ: {}
