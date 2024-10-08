@@ -1,0 +1,59 @@
+Part 1:
+1. What is LibUV?
+LibUV is a multi-platform support library with a focus on asynchornous I/O.
+It is used for Node.js but it also used for Julia, Luvit and others.
+
+Features
+- Full-featured event loop backed by epoll, kqueue, IOCP, event ports.
+- Asynchronous TCP and UDP sockets
+- Asynchronous DNS resolution
+- Asynchronous file and file system operations
+- File system events
+- ANSI escape code controlled TTY
+- IPC with socket sharing, using Unix domain sockets or named pipes (Windows)
+- Child processes
+- Thread pool
+- Signal handling
+- High resolution clock
+- Threading and synchronization primitives
+
+https://docs.libuv.org/en/v1.x/
+
+2. Explain the difference between setImmediate(f) and setTimeout(f, Time)?
+setImmediate(f):
+- Executes the callback function after the current poll phase completes
+- Queued in the check phase of the event loop
+- Generally executes before timers if scheduled within an I/O cycle
+
+setTimeout(f, 0):
+- Schedules the callback to run after a minimum delay of 0 ms
+- Actually executed after a minimum delay of 1 ms due to browser limitations
+- Queued in the timers phase of the event loop
+
+In practice, setTimeout with a 0 ms delay doesn't execute immediately. 
+The execution order between these two can vary depending on the context in which they're called.
+
+3. Explain the difference between process.nextTick(f) and setImmediate(f)?
+process.nextTick(f):
+- Executes the callback function at the end of the current operation, before the next event loop tick
+- Has higher priority and runs before I/O events and timers
+- Can cause I/O starvation if overused, as it runs before the event loop continues
+
+setImmediate(f):
+- Executes the callback function in the next iteration of the event loop
+- Queued in the check phase, after I/O events
+- Provides a way to execute code asynchronously, but with lower priority than nextTick
+
+Part 2:
+nextTick 1
+Promise.resolve 1
+Promise.resolve 2
+nextTick inside Promise
+this is setTimeout
+this is setImmediate 1
+this is setImmediate 2
+Promise.resolve inside setImmediate
+readablStream close event
+hello
+world
+this is setTimeout
