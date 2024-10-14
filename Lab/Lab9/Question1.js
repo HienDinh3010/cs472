@@ -10,3 +10,9 @@ fs.readFile('./files/input.txt', "utf-8", (err, data) => {
         console.log(data);
     }
 });
+//promise 1
+//nextTick 1
+//setImmediate 1
+//setTimeout 1
+//hello
+//world
