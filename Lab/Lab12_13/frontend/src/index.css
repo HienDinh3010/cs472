@@ -1,0 +1,25 @@
+
+.header {
+  background-color: orange; /* Background color of the header */
+  width: 100%; /* Full width of the page */
+  height: 100px; /* Fixed height */
+  display: flex; /* Center the text */
+  justify-content: center; /* Horizontally center the text */
+  align-items: center; /* Vertically center the text */
+  font-size: 80px; /* Font size of the text */
+  color: white; /* Optional: Text color for contrast */
+  margin: 0; /* Remove any default margin */
+  padding: 0; /* Remove any default padding */
+  box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+.footer {
+  background-color: rgb(233, 227, 227); /* Background color of the footer */
+  color: black; /* Text color */
+  width: 100%; /* Full width of the page */
+  height: 30px; /* Fixed height */
+  display: flex; /* Flexbox to align items */
+  justify-content: space-between; /* Space between the text groups */
+  align-items: center; /* Vertically center the text */
+  padding: 0 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
